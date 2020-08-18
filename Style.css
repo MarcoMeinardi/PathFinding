@@ -1,3 +1,9 @@
+body {
+ 	font-family: Arial, Helvetica, sans-serif;
+ 	font-size: 20px;
+ 	color: white;
+}
+
 .grid {
 	position: absolute;
 	left: 0;
@@ -68,4 +74,14 @@
 .cell.deanimate {
 	border-radius: 0;
 	transform: scale(1);
+}
+
+.selector {
+	position: fixed;
+	z-index: 10;
+	right: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 10px;
+	border-radius: 15px;
+	width: 150px;
 }

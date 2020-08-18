@@ -8,10 +8,11 @@ var set_start, set_goal, set_walls;
 var start, goal;
 var path;
 
-
 var already_clicked;
 var placing;
 var searching;
+
+var algorithms;
 
 function init() {
 	grid_el = document.querySelector (".grid");
@@ -35,25 +36,36 @@ function init() {
 	start = undefined;
 	goal  = undefined;
 	searching = false;
+
+	algorithms = document.getElementsByName ("Algorithms");
+	for (i in algorithms) {
+		algorithms[i].onclick = function (e) {
+			e.stopPropagation();
+		}
+	}
 }
 init();
 
 document.addEventListener ("mousedown", function (e) {
-	if (!searching) {
-		clear_search();
-		let y = Math.floor (e.pageY / 30), x = Math.floor (e.pageX / 30);
-		grid[y][x].click_cell();
-		e.preventDefault();
+	if (e.clientX >= 0 && e.clientX < window.innerWidth && e.clientY >= 0 && e.clientY < window.innerHeight) {
+		if (!searching) {
+			clear_search();
+			let y = Math.floor (e.pageY / 30), x = Math.floor (e.pageX / 30);
+			grid[y][x].click_cell();
+			e.preventDefault();
+		}
 	}
 });
 
 document.addEventListener ("mousemove", function (e) {
-	if (!searching) {
-		if (set_walls) {
-			let y = Math.floor (e.pageY / 30), x = Math.floor (e.pageX / 30);
-			grid[y][x].place_wall();
+	if (e.clientX >= 0 && e.clientX < window.innerWidth && e.clientY >= 0 && e.clientY < window.innerHeight) {
+		if (!searching) {
+			if (set_walls) {
+				let y = Math.floor (e.pageY / 30), x = Math.floor (e.pageX / 30);
+				grid[y][x].place_wall();
+			}
 		}
-	}
+		}
 });
 
 document.addEventListener ("mouseup", function () {
@@ -68,8 +80,19 @@ document.addEventListener ("keydown", async function (e) {
 		path = [];
 		clear_search();
 		await new Promise (r => setTimeout (r, 100));
-		A_star();
-		//dijkstra();
+		for (i in algorithms) {
+			if (algorithms[i].checked) {
+				switch (algorithms[i].value) {
+				case "AStar":
+					A_star();
+					break;
+				case "Dijkstra":
+					Dijkstra();
+					break;
+				}
+				break;
+			}
+		}
 	} else if (e.keyCode == 114 || e.keyCode == 82) {
 		init();
 	}

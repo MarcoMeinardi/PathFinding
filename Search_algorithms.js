@@ -54,7 +54,7 @@ async function A_star () {
 	return false;
 }
 
-async function dijkstra () {
+async function Dijkstra () {
 	let open = [start];
 	start.g = 0;
 
