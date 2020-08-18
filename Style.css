@@ -1,0 +1,71 @@
+.grid {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1920px;
+	height: 1080px;
+	z-index: -1;
+}
+
+.path-container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1920px;
+	height: 1080px;
+	z-index: -1;
+}
+
+.path {
+	position: absolute;
+	background-color: #FFFF00;
+	height: 3px;
+	z-index: 10;
+	transform-origin: 0% 0%;
+}
+
+.cell {
+	position: absolute;
+	background-color: rgb(255, 255, 255);
+	width: 28px;
+	height: 28px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	z-index: 0;
+	transition: 200ms;
+}
+
+.cell.start {
+	background-color: #0D0;
+	z-index: 3;
+}
+
+.cell.goal {
+	background-color: #E40;
+	z-index: 3;
+}
+
+.cell.wall {
+	background-color: gray;
+	z-index: 2;
+}
+
+.cell.open {
+	background-color: #98FB98;
+	z-index: 2;	
+}
+
+.cell.close {
+	background-color: #AFEEEE;
+	z-index: 1;	
+}
+
+.cell.animate {
+	z-index: 10;
+	border-radius: 10px;
+	transform: scale(1.4);
+}
+
+.cell.deanimate {
+	border-radius: 0;
+	transform: scale(1);
+}
